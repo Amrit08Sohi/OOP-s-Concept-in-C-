@@ -14,8 +14,6 @@ class Iterator {
         int data();
 };
 
-
-
 class List {
     Node *head, *tail;
     public:
@@ -35,7 +33,7 @@ class Node {
 
 void Iterator::begin(List *l) {
     list = l;
-    node = l->head;
+    node = l->head; // possible because Iterator class is friend of List class but not vice-versa.
 }
 
 bool Iterator::end() {
@@ -43,19 +41,19 @@ bool Iterator::end() {
 }
 
 void Iterator::next() {
-    node = node->next;
+    node = node->next; // possible because Iterator class is friend of Node class
 }
 
 int Iterator::data() {
-    return node->info;
+    return node->info; // possible because Iterator class is friend of Node class
 }
 void List::append(Node *newNode)  {
     if(!head) {
         head = tail = newNode;
         return;
     } else {
-        tail->next = newNode;
-        tail = tail->next;
+        tail->next = newNode; // possible because List class is friend of Node class
+        tail = tail->next; // possible because List class is friend of Node class
     }
 }
 int main()
